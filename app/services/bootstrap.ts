@@ -4,6 +4,19 @@ import { createIndexIfNecessary, pineconeIndexHasVectors } from "./pinecone";
 import path from "path";
 import { DirectoryLoader } from "langchain/document_loaders/fs/directory";
 import { PDFLoader } from "@langchain/community/document_loaders/fs/pdf";
+import { promises as fs } from "fs";
+
+const readMetaData = async (): Promise<Document['metadata'][]> => {
+    try{
+        const filePath = path.resolve(process.cwd(), 'docs/db.json');
+        const data = await fs.readFile(filePath, "utf8");
+        const parsed = JSON.parse(data);
+        return parsed.documents || [];
+    }catch(error){
+        console.warn("Could not read Metadata", error);
+        return [];
+    }
+};
 export const initialBootstrapping = async (targetIndex:string) => {
     const baseURL = process.env.PRODUCTION_URL ? `https://${process.env.PRODUCTION_URL}` : `http://localhost:${process.env.PORT}`;
     const res = await fetch(`${baseURL}/api/ingest`, {
@@ -40,6 +53,8 @@ export const handleBootstrapping = async (targetIndex:string) => {
             console.warn('No PDF documents found in docs directory'); 
             return NextResponse.json({ error: 'No documents found' }, { status: 400 });
         }
+
+        const metadata = await readMetaData();
     } catch (error) {
         console.error('Bootstrapping failed', error);
     }
