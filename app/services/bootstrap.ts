@@ -1,5 +1,7 @@
 "use server";
-import { createIndexIfNecessary } from "./pinecone";
+import { NextResponse } from "next/server";
+import { createIndexIfNecessary, pineconeIndexHasVectors } from "./pinecone";
+import path from "path";
 export const initialBootstrapping = async (targetIndex:string) => {
     const baseURL = process.env.PRODUCTION_URL ? `https://${process.env.PRODUCTION_URL}` : `http://localhost:${process.env.PORT}`;
     const res = await fetch(`${baseURL}/api/ingest`, {
@@ -18,7 +20,16 @@ export const handleBootstrapping = async (targetIndex:string) => {
     try {
         console.log('Bootstrapping successful');
         await createIndexIfNecessary(targetIndex);
-        const hasVectors = await
+        const hasVectors = await pineconeIndexHasVectors(targetIndex);
+
+        if(hasVectors){
+            console.log('Index already has vectors');
+            return NextResponse.json({ success: true }, { status: 200 });
+        }
+
+        console.log('Loading documents and metadata');
+
+        const docsPath = path.resolve(process.cwd(), 'docs/');
     } catch (error) {
         console.error('Bootstrapping failed', error);
     }
