@@ -9,9 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroicons/react": "^2.1.5",
     "@langchain/community": "^0.3.14",
+    "@langchain/core": "^0.3.18",
+    "@langchain/openai": "^0.3.13",
     "@langchain/pinecone": "^0.1.2",
+    "@langchain/textsplitters": "^0.1.0",
     "@pinecone-database/pinecone": "^4.0.0",
+    "@types/uuid": "^10.0.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.460.0",
