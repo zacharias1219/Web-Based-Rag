@@ -4,6 +4,7 @@ import { createIndexIfNecessary, pineconeIndexHasVectors } from "./pinecone";
 import path from "path";
 import { DirectoryLoader } from "langchain/document_loaders/fs/directory";
 import { PDFLoader } from "@langchain/community/document_loaders/fs/pdf";
+import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 import { promises as fs } from "fs";
 import { type Document } from "../types/document";
 
@@ -65,9 +66,9 @@ export const handleBootstrapping = async (targetIndex:string) => {
         }
 
         const metadata = await readMetaData();
-        const validDoucments = documents.filter((doc) => isValidContent(doc.pageContent));
+        const validDocuments = documents.filter((doc) => isValidContent(doc.pageContent));
 
-        validDoucments.forEach((doc) => {
+        validDocuments.forEach((doc) => {
             const fileMetadata = metadata.find(
                 (meta) => meta.filename === path.basename(doc.metadata.source)
             );
@@ -76,7 +77,14 @@ export const handleBootstrapping = async (targetIndex:string) => {
             }
         });
 
-        console.log(`Found ${validDoucments.length} valid documents`);
+        console.log(`Found ${validDocuments.length} valid documents`);
+
+        const splitter = new RecursiveCharacterTextSplitter({
+            chunkSize: 1000,
+            chunkOverlap: 200,
+        });
+        const splits = await splitter.splitDocuments(validDocuments);
+        console.log(`Created ${splits.length} splits`);
     } catch (error) {
         console.error('Bootstrapping failed', error);
     }
