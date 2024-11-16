@@ -5,6 +5,8 @@ import path from "path";
 import { DirectoryLoader } from "langchain/document_loaders/fs/directory";
 import { PDFLoader } from "@langchain/community/document_loaders/fs/pdf";
 import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
+import { VoyageEmbeddings } from "@langchain/community/embeddings/voyage";
+import { v4 as uuidv4 } from "uuid";
 import { promises as fs } from "fs";
 import { type Document } from "../types/document";
 
@@ -19,6 +21,20 @@ const readMetaData = async (): Promise<Document['metadata'][]> => {
         return [];
     }
 };
+
+const flattenMetadata = (metadata: any): Document['metadata'] => {
+    const flatMetadata = { ...metadata };
+    if (flatMetadata.pdf) {
+        if (flatMetadata.pdf.pageCount) {
+            flatMetadata.totalPages = flatMetadata.pdf.pageCount;
+        }
+        delete flatMetadata.pdf;
+    }
+    if (flatMetadata.loc) {
+        delete flatMetadata.loc;
+    }
+    return flatMetadata;
+}
 
 const isValidContent = (content: string): boolean => {
     if (!content || typeof content !== 'string') {
@@ -85,6 +101,42 @@ export const handleBootstrapping = async (targetIndex:string) => {
         });
         const splits = await splitter.splitDocuments(validDocuments);
         console.log(`Created ${splits.length} splits`);
+
+        const BATCH_SIZE = 5;
+
+        for (let i = 0; i < splits.length; i += BATCH_SIZE) {
+            const batch = splits.slice(i, i + BATCH_SIZE);
+            console.log(
+                `Processing batch ${Math.floor(i / BATCH_SIZE) + 1} of ${Math.ceil(splits.length / BATCH_SIZE)}`
+            );
+
+            const validBatch = batch.filter((split) => isValidContent(split.pageContent));
+            if (validBatch.length === 0) {
+                console.warn('No valid splits in this batch');
+                continue;
+            }
+
+            const castedBatch: Document[] = validBatch.map((split) => ({
+                pageContent: split.pageContent.trim(),
+                metadata: {
+                    ...flattenMetadata(split.metadata as Document["metadata"]),
+                    id: uuidv4(),
+                    pageContent: split.pageContent.trim(),
+                },
+            }));
+
+            try{
+                const voyageEmbeddings = new VoyageEmbeddings({
+                    apiKey: process.env.VOYAGE_API_KEY,
+                    inputType: "document",
+                    modelName: "voyage-law-2",
+                });
+
+                
+            } catch (error) {
+                console.error('Failed to ingest batch', error);
+            }
+        }
     } catch (error) {
         console.error('Bootstrapping failed', error);
     }
