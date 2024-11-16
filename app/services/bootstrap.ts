@@ -5,6 +5,7 @@ import path from "path";
 import { DirectoryLoader } from "langchain/document_loaders/fs/directory";
 import { PDFLoader } from "@langchain/community/document_loaders/fs/pdf";
 import { promises as fs } from "fs";
+import { type Document } from "../types/document";
 
 const readMetaData = async (): Promise<Document['metadata'][]> => {
     try{
@@ -17,6 +18,15 @@ const readMetaData = async (): Promise<Document['metadata'][]> => {
         return [];
     }
 };
+
+const isValidContent = (content: string): boolean => {
+    if (!content || typeof content !== 'string') {
+        return false;
+    }
+    const trimmed = content.trim();
+    return trimmed.length > 0 && trimmed.length < 8192;
+};
+
 export const initialBootstrapping = async (targetIndex:string) => {
     const baseURL = process.env.PRODUCTION_URL ? `https://${process.env.PRODUCTION_URL}` : `http://localhost:${process.env.PORT}`;
     const res = await fetch(`${baseURL}/api/ingest`, {
@@ -55,6 +65,18 @@ export const handleBootstrapping = async (targetIndex:string) => {
         }
 
         const metadata = await readMetaData();
+        const validDoucments = documents.filter((doc) => isValidContent(doc.pageContent));
+
+        validDoucments.forEach((doc) => {
+            const fileMetadata = metadata.find(
+                (meta) => meta.filename === path.basename(doc.metadata.source)
+            );
+            if (fileMetadata) {
+                doc.metadata = { ...doc.metadata, ...fileMetadata, pageContent: doc.pageContent };
+            }
+        });
+
+        console.log(`Found ${validDoucments.length} valid documents`);
     } catch (error) {
         console.error('Bootstrapping failed', error);
     }
