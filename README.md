@@ -75,11 +75,10 @@ Copy code
     - Add the following variables:
         
         ```
-        env
-        Copy code
-        PINECONE_API_KEY=your_pinecone_api_key
-        VOYAGE_API_KEY=your_voyage_api_key
-        NEXT_PUBLIC_BASE_URL=http://localhost:3000
+        PINECONE_API_KEY=you_pinecon_api_key
+        VOYAGE_API_KEY=you_voyage_api_key
+        PINECONE_INDEX=you_pinecone_index
+        PORT='3000'
         
         ```
         
@@ -92,8 +91,6 @@ Copy code
 1. Start the development server:
     
     ```bash
-    bash
-    Copy code
     npm run dev
     
     ```
@@ -109,8 +106,6 @@ To deploy the app to production:
 2. Deploy to a platform like Vercel:
     
     ```bash
-    bash
-    Copy code
     npm run build
     npm run start
     
