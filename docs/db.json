@@ -1,0 +1,13 @@
+{
+    "documents": [
+      {
+        "filename": "Constitution.pdf",
+        "title": "Indian Constitution",
+        "plaintiff": "Indian Citizens",
+        "defendant": "Government of India",
+        "date": "26th January 1950",
+        "topic": "Constitutional Law",
+        "outcome": "In force"
+      }
+    ]
+  }

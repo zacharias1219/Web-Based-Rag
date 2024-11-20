@@ -38,14 +38,14 @@ const SearchForm: React.FC<SearchFormProps> = ({ suggestedSearches, onSearch }) 
           value={query}
           onChange={handleInputChange}
           onFocus={handleFocus}
-          className="w-full px-4 py-2 border border-gray-300 bg-gray-200 rounded-lg shadow-sm focus:outline-none"
+          className="w-full px-4 py-2 border border-gray-800 bg-gray-900 text-white rounded-lg shadow-sm focus:outline-none"
           placeholder="Search legal docs or view suggestions"
         />
         {query && (
           <button
             type="button"
             onClick={handleClear}
-            className="absolute top-1/2 transform -translate-y-1/2 right-14 text-gray-500 hover:text-gray-700"
+            className="absolute top-1/2 transform -translate-y-1/2 right-14 text-gray-300 hover:text-gray-100"
           >
             ✕
           </button>
@@ -59,7 +59,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ suggestedSearches, onSearch }) 
         </button>
         {showSuggestions && suggestions.length > 0 && (
           <div className="absolute mt-2 w-full bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto z-10">
-            <div className="px-4 py-2 text-gray-700 font-semibold">Popular searches</div>
+            <div className="px-4 py-2 text-gray-900 font-semibold">Popular searches</div>
             {suggestions.map((suggestion, index) => (
               <div
                 key={index}

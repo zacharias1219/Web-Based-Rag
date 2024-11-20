@@ -63,18 +63,18 @@ const handleSearch = async (
 };
 
 const suggestedSearches = [
-  "Cases about personal freedoms being violated",
-  "Cases involving a US President",
-  "Cases involving guns",
-  "Cases where Nixon was the defendant",
-  "How much power does the commerce clause give Congress?",
-  "Cases about personal rights or congressional overreach?",
-  "Cases involving the ability to pay for an attorney",
-  "Cases about the right to remain silent",
-  "Landmark cases that shaped freedom of speech laws",
-  "Cases where defendant was found with a gun",
-  "What cases involved personal rights or congressional overreach?",
-  "Cases where the judge expressed grave concern",
+  "Fundamental Rights under Indian Constitution",
+  "Landmark Supreme Court cases on Article 21",
+  "Basic Structure Doctrine cases in India",
+  "Right to Equality under Article 14",
+  "Freedom of Speech cases under Article 19",
+  "Directive Principles of State Policy interpretation",
+  "Right to Constitutional Remedies Article 32",
+  "Landmark cases on Judicial Review in India",
+  "Fundamental Duties under Indian Constitution",
+  "Cases about Centre-State relations in India",
+  "Public Interest Litigation landmark cases",
+  "Right to Education Article 21A cases"
 ];
 
 export default function Home() {
@@ -109,12 +109,12 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <div className="min-h-screen bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex flex-col items-center w-full mb-8">
           {isBootstrapping && (
-            <div className="flex items-center space-x-3 bg-white p-4 rounded-lg shadow-sm">
-              <p className="text-gray-600">Processing legal documents...</p>
+            <div className="flex items-center space-x-3 bg-gray-600 p-4 rounded-lg shadow-sm">
+              <p className="text-white">Processing legal documents...</p>
               <div className="spinner border-4 border-t-transparent border-indigo-600 rounded-full w-5 h-5 animate-spin"></div>
             </div>
           )}
@@ -122,10 +122,10 @@ export default function Home() {
 
         {isIndexReady && !isBootstrapping && (
           <div className="w-full">
-            <h1 className="text-4xl font-bold text-center text-gray-900 mb-3">
+            <h1 className="text-4xl font-bold text-center text-white mb-3">
               Legal Document Search
             </h1>
-            <p className="text-center text-gray-600 text-lg mb-8">
+            <p className="text-center text-white/60 text-lg mb-8">
               Use natural language to explore legal documents and precedents
             </p>
 
