@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Legal Semantic Search Application
+A cutting-edge AI Legal Semantic Search App built using PineconeDB, VoyageAI, LangChain, and Next.js. This project demonstrates how to perform semantic searches over a legal document database efficiently, making it particularly useful for law students, lawyers, and researchers.
 
-## Getting Started
+Features
+Semantic Search: Uses AI-powered embeddings for natural language search across legal documents.
+Vector Database: Integrates PineconeDB to store and query vector embeddings.
+Scalable Workflow: Designed to handle metadata and optimize search relevance.
+Optimized Indexing: Processes, embeds, and indexes legal documents for fast retrieval.
+Interactive Interface: Built with Next.js to allow seamless search and interaction.
+Tech Stack
+Frontend: Next.js for building the user interface.
+Backend: API endpoints using Next.js server-side functions.
+Database: PineconeDB for vector storage and queries.
+AI Tools: VoyageAI for embeddings and LangChain for data transformation.
+Project Structure
+java
+Copy code
+├── app
+│   ├── api
+│   │   ├── bootstrap
+│   │   ├── ingest
+│   │   └── search
+│   ├── components
+│   ├── services
+│   ├── types
+│   ├── utils
+│   └── pages
+├── docs
+│   └── Legal Documents (.pdf)
+├── public
+│   └── Static Assets
+├── styles
+└── package.json
+Getting Started
+Prerequisites
+Node.js: Ensure Node.js is installed.
+Pinecone API Key: Obtain an API key from Pinecone Console.
+VoyageAI API Key: Create an account and generate an API key from the VoyageAI Dashboard.
+Installation
+Clone the repository:
 
-First, run the development server:
+bash
+Copy code
+git clone https://github.com/yourusername/legal-semantic-search.git
+cd legal-semantic-search
+Install dependencies:
 
-```bash
+bash
+Copy code
+npm install
+Set up environment variables:
+
+Create a .env.local file in the root directory.
+Add the following variables:
+env
+Copy code
+PINECONE_API_KEY=your_pinecone_api_key
+VOYAGE_API_KEY=your_voyage_api_key
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+Prepare the data:
+
+Place legal document PDFs in the docs directory.
+Define metadata for each document in a db.json file.
+Running the Application
+Start the development server:
+
+bash
+Copy code
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Visit the app at http://localhost:3000.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Search for legal cases using natural language.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Deployment
+To deploy the app to production:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Configure your .env file for the production environment.
+Deploy to a platform like Vercel:
+bash
+Copy code
+npm run build
+npm run start
+How It Works
+Workflow
+Document Embedding: Documents are processed into vector embeddings.
+Index Creation: Vectors are stored in PineconeDB with metadata.
+Search Optimization: Queries are filtered and re-ranked using VoyageAI.
+Interactive Search: Users perform searches via a Next.js-powered interface.
+Example Use Cases
+Search for cases involving specific legal topics or parties.
+Retrieve precedents based on metadata such as date, defendant, or outcome.
+Future Improvements
+Expand the knowledge base to include more legal documents.
+Add multi-language support for global accessibility.
+Enhance UI/UX for better user interaction.
+Contributing
+We welcome contributions to enhance this project! Feel free to fork the repository and submit pull requests.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+License
+This project is licensed under the MIT License. See the LICENSE file for details.
