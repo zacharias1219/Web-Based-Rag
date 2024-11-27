@@ -20,8 +20,7 @@ A cutting-edge **AI Document Semantic Search App** built using **PineconeDB**, *
 ## Project Structure
 
 ```java
-java
-Copy code
+code
 ├── app
 │   ├── api
 │   │   ├── bootstrap
@@ -54,8 +53,6 @@ Copy code
 1. Clone the repository:
     
     ```bash
-    bash
-    Copy code
     git clone https://github.com/yourusername/legal-semantic-search.git
     cd legal-semantic-search
     
@@ -64,8 +61,6 @@ Copy code
 2. Install dependencies:
     
     ```bash
-    bash
-    Copy code
     npm install
     
     ```
