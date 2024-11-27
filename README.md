@@ -1,6 +1,6 @@
 # Document Semantic Search Application
 
-A cutting-edge **AI Legal Semantic Search App** built using **PineconeDB**, **VoyageAI**, **LangChain**, and **Next.js**. This project demonstrates how to perform semantic searches over a legal document database efficiently, making it particularly useful for law students, lawyers, and researchers.
+A cutting-edge **AI Document Semantic Search App** built using **PineconeDB**, **VoyageAI**, **LangChain**, and **Next.js**. This project demonstrates how to perform semantic searches over a legal document database efficiently, making it particularly useful for law students, lawyers, and researchers.
 
 ## Features
 
