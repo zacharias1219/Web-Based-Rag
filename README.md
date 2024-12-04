@@ -51,32 +51,32 @@ code
 ### Installation
 
 1. Clone the repository:
-    
+
     ```bash
     git clone https://github.com/yourusername/legal-semantic-search.git
     cd legal-semantic-search
     
     ```
-    
+
 2. Install dependencies:
-    
+
     ```bash
     npm install
     
     ```
-    
+
 3. Set up environment variables:
     - Create a `.env.local` file in the root directory.
     - Add the following variables:
-        
-        ```
-        PINECONE_API_KEY=you_pinecon_api_key
-        VOYAGE_API_KEY=you_voyage_api_key
-        PINECONE_INDEX=you_pinecone_index
-        PORT='3000'
-        
-        ```
-        
+
+    ```bash
+    PINECONE_API_KEY=you_pinecon_api_key
+    VOYAGE_API_KEY=you_voyage_api_key
+    PINECONE_INDEX=you_pinecone_index
+    PORT='3000'
+    
+    ```
+
 4. Prepare the data:
     - Place legal document PDFs in the `docs` directory.
     - Define metadata for each document in a `db.json` file.
@@ -84,12 +84,12 @@ code
 ### Running the Application
 
 1. Start the development server:
-    
+
     ```bash
     npm run dev
     
     ```
-    
+
 2. Visit the app at `http://localhost:3000`.
 3. Search for legal cases using natural language.
 
@@ -99,13 +99,12 @@ To deploy the app to production:
 
 1. Configure your `.env` file for the production environment.
 2. Deploy to a platform like Vercel:
-    
+
     ```bash
     npm run build
     npm run start
     
     ```
-    
 
 ## How It Works
 
