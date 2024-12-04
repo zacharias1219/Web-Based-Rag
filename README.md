@@ -115,6 +115,12 @@ To deploy the app to production:
 3. **Search Optimization**: Queries are filtered and re-ranked using VoyageAI.
 4. **Interactive Search**: Users perform searches via a Next.js-powered interface.
 
+### Images
+
+![Screenshot 2024-12-04 192352](https://github.com/user-attachments/assets/4e6fcaa8-3c23-4f7d-b728-3acae5830148)
+
+![Screenshot 2024-12-04 192405](https://github.com/user-attachments/assets/821df4e9-9d69-4ec9-90de-07c10a79fa50)
+
 ### Example Use Cases
 
 - Search for cases involving specific legal topics or parties.
